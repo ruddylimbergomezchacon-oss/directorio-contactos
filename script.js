@@ -31,3 +31,8 @@ function agregarContacto() {
 }
 
 btnAgregar.addEventListener('click', agregarContacto);
+// Función para eliminar un contacto por ID
+function eliminarContacto(id) {
+  contactos = contactos.filter(contacto => contacto.id !== id);
+  renderizarContactos();
+}
