@@ -36,3 +36,35 @@ function eliminarContacto(id) {
   contactos = contactos.filter(contacto => contacto.id !== id);
   renderizarContactos();
 }
+// Elementos adicionales del DOM
+const buscarInput = document.getElementById('buscarInput');
+const totalContactos = document.getElementById('totalContactos');
+
+// Función para renderizar la lista de contactos en el HTML
+function renderizarContactos() {
+  listaContactos.innerHTML = '';
+
+  const textoBusqueda = buscarInput ? buscarInput.value.toLowerCase() : '';
+  const contactosFiltrados = contactos.filter(contacto => 
+    contacto.nombre.toLowerCase().includes(textoBusqueda)
+  );
+
+  if (contactosFiltrados.length === 0) {
+    listaContactos.innerHTML = '<li class="mensaje-vacio">No hay contactos guardados.</li>';
+  } else {
+    contactosFiltrados.forEach(contacto => {
+      const li = document.createElement('li');
+      li.className = 'contacto-item';
+      li.innerHTML = `
+        <span><strong>${contacto.nombre}</strong>: ${contacto.telefono}</span>
+        <button class="btn-eliminar" onclick="eliminarContacto(${contacto.id})">Eliminar</button>
+      `;
+      listaContactos.appendChild(li);
+    });
+  }
+
+  if (totalContactos) {
+    totalContactos.textContent = contactos.length;
+  }
+}
+
