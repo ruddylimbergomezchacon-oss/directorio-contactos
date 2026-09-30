@@ -67,4 +67,11 @@ function renderizarContactos() {
     totalContactos.textContent = contactos.length;
   }
 }
+// Evento para búsqueda en tiempo real
+if (buscarInput) {
+  buscarInput.addEventListener('input', renderizarContactos);
+}
+
+// Inicializar la lista al cargar la página
+renderizarContactos();
 
